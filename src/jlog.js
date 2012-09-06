@@ -21,16 +21,14 @@
  * limitations under the License
  *
  **************************************************************
- *
- * Changelog:
- * 0.31 Bug fix (resizeable should be resizable - Darryl Lyons)
- * 0.3  Migrated to SF.net SVN repository - test cleanups
- * 0.2  - Added consoleLogger for Safari
- *    - Changed popupLogger so that it only notifies once (or twice)
- *      that a popup blocker is active.
- *    - Added JLog.NONE level for silencing all logging
  * </pre>
  */
+
+/**
+*
+* @remixer Alexey Golubev mailto:oholubyev@heliostech.hk
+*
+**/
 
 function JLog(name) {
   var _currentLevel = JLog.ALL,
@@ -161,8 +159,8 @@ JLog.prototype._log = function() {
   if (this.isOn()) {
     var level = arguments[0],
         args = Array.prototype.slice.call(arguments[1]),
-        namePrefix = this.getName() ? this.getName() + ': ' : '',
-        msgString = level + ' - ' + namePrefix,
+        namePrefix = this.getName() ? '[' + this.getName() + ']' : '',
+        msgString = level + namePrefix + ': ',
         appenders = this.getAppenders();
 
     for (var i in args) {
